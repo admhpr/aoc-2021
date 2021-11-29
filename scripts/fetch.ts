@@ -1,12 +1,15 @@
-require("dotenv").config()
+import { config } from "dotenv"
 
 
-const { mkdir, writeFile } = require("fs").promises
-const { resolve, join } = require("path")
+import { mkdir, writeFile } from "fs"
+import { resolve, join } from "path"
+
+config()
 const { SESSION_COOKIE } = process.env
 
-const https = require("https")
-const { parsePage } = require("./toMarkdown")
+import https from "https"
+import { parsePage } from "./toMarkdown"
+
 const cookie = `session=${SESSION_COOKIE}`
 const YEAR = `${new Date().getFullYear()}`
 
@@ -20,7 +23,7 @@ const BASE_URL = `https://adventofcode.com/${YEAR}/day/${DAY}`
 
 async function createDir(location) {
   try {
-    await mkdir(location)
+    await mkdir(location, (param) => param)
   } catch {
     console.error(`folder already exists. ${location}`)
   }
@@ -28,7 +31,7 @@ async function createDir(location) {
 
 async function createStart(location) {
   const template = `
-    const { readFileSync } = require("fs")
+    import { readFileSync } from "fs"
     // const inputs = readFileSync("./input", "UTF-8").split(/n/) \\
     function main(inputs){
       console.log(inputs)
@@ -36,7 +39,7 @@ async function createStart(location) {
     main(inputs)
   `
   try {
-    await writeFile(join(location, "index.js"), template, { flag: "wx" })
+    await writeFile(join(location, "index.js"), template, { flag: "wx" }, (param) => param)
   } catch (e) {
     console.error(`file already exists. ${location}/index.js`)
   }
@@ -51,7 +54,7 @@ function createInput(location) {
       for await (const chunk of res) {
         body += chunk
       }
-      await writeFile(join(location, "input"), body.trim())
+      await writeFile(join(location, "input"), body.trim(), {}, (param) => param)
     } catch (e) {
       console.error(e)
     }
@@ -67,7 +70,7 @@ function createInstructions(location) {
         body += chunk
       }
       const markdown = parsePage(body, BASE_URL)
-      await writeFile(join(location, "README.md"), markdown)
+      await writeFile(join(location, "README.md"), markdown, {}, (param) => param)
     } catch (e) {
       console.error(e)
     }
