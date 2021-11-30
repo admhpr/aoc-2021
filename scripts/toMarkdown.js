@@ -1,9 +1,8 @@
-import { load } from "cheerio"
-import * as TurndownService from "turndown"
-import { gfm } from "turndown-plugin-gfm"
+const { load } = require("cheerio")
+const TurndownService = require("turndown")
+const { gfm } = require("turndown-plugin-gfm")
 
-
-export function parsePage(body, url) {
+module.exports.parsePage = function parsePage(body, url) {
   const document = load(body)
   const instructions = load("")
 

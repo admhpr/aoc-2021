@@ -1,15 +1,10 @@
-import { config } from "dotenv"
-
-
-import { mkdir, writeFile } from "fs"
-import { resolve, join } from "path"
-
-config()
+require("dotenv").config()
+const { mkdir, writeFile } = require("fs").promises
+const { resolve, join } = require("path")
 const { SESSION_COOKIE } = process.env
 
-import https from "https"
-import { parsePage } from "./toMarkdown"
-
+const https = require("https")
+const { parsePage } = require("./toMarkdown")
 const cookie = `session=${SESSION_COOKIE}`
 const YEAR = `${new Date().getFullYear()}`
 
@@ -23,7 +18,7 @@ const BASE_URL = `https://adventofcode.com/${YEAR}/day/${DAY}`
 
 async function createDir(location) {
   try {
-    await mkdir(location, (param) => param)
+    await mkdir(location)
   } catch {
     console.error(`folder already exists. ${location}`)
   }
@@ -31,7 +26,7 @@ async function createDir(location) {
 
 async function createStart(location) {
   const template = `
-    import { readFileSync } from "fs"
+    const { readFileSync } = require("fs")
     // const inputs = readFileSync("./input", "UTF-8").split(/n/) \\
     function main(inputs){
       console.log(inputs)
@@ -39,7 +34,7 @@ async function createStart(location) {
     main(inputs)
   `
   try {
-    await writeFile(join(location, "index.js"), template, { flag: "wx" }, (param) => param)
+    await writeFile(join(location, "index.js"), template, { flag: "wx" })
   } catch (e) {
     console.error(`file already exists. ${location}/index.js`)
   }
@@ -54,7 +49,7 @@ function createInput(location) {
       for await (const chunk of res) {
         body += chunk
       }
-      await writeFile(join(location, "input"), body.trim(), {}, (param) => param)
+      await writeFile(join(location, "input"), body.trim())
     } catch (e) {
       console.error(e)
     }
@@ -70,7 +65,7 @@ function createInstructions(location) {
         body += chunk
       }
       const markdown = parsePage(body, BASE_URL)
-      await writeFile(join(location, "README.md"), markdown, {}, (param) => param)
+      await writeFile(join(location, "README.md"), markdown)
     } catch (e) {
       console.error(e)
     }
