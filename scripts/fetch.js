@@ -33,10 +33,11 @@ async function createStart(location) {
     }
     main(inputs)
   `
+  const file = "index.ts"
   try {
-    await writeFile(join(location, "index.js"), template, { flag: "wx" })
+    await writeFile(join(location, file), template, { flag: "wx" })
   } catch (e) {
-    console.error(`file already exists. ${location}/index.js`)
+    console.error(`file already exists. ${location}/${file}`)
   }
 }
 
