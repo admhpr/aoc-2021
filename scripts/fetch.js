@@ -8,11 +8,7 @@ const { parsePage } = require("./toMarkdown")
 const cookie = `session=${SESSION_COOKIE}`
 const YEAR = `${new Date().getFullYear()}`
 
-const DAY = process.argv[2]
-  ? process.argv[2]
-  : (function () {
-      throw "please provide day number"
-    })()
+const DAY = process.argv[2] ? process.argv[2] : new Date().getDate()
 
 const BASE_URL = `https://adventofcode.com/${YEAR}/day/${DAY}`
 
@@ -27,11 +23,17 @@ async function createDir(location) {
 async function createStart(location) {
   const template = `
     const { readFileSync } = require("fs")
-    // const inputs = readFileSync("./input", "UTF-8").split(/n/) \\
-    function main(inputs){
-      console.log(inputs)
+    // const input = readFileSync("./input", "UTF-8").split(/n/) \\
+    function part1(input){
+      console.log(input)
     }
-    main(inputs)
+    // function part2(input){
+    //   console.log(input)
+    // }
+    function main(input){
+      part1(input)
+    }
+    main(input)
   `
   const file = "index.ts"
   try {
