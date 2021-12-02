@@ -13,6 +13,7 @@
   "description": "advent of code 2021",
   "main": "index.js",
   "scripts": {
+    "start": "node scripts/fetch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
