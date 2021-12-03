@@ -24,6 +24,7 @@ async function createStart(location) {
   const template = `
     const { readFileSync } = require("fs")
     // const input = readFileSync("./input", "UTF-8").split(/n/) \\
+    .map((line) => line.trim().split(''));
     function part1(input){
       console.log(input)
     }
