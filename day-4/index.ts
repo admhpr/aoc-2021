@@ -71,33 +71,37 @@ function main(input: any) {
         .map(Number)
     )
   const results = []
+  let winningBoardHorizontal = []
+  let winningBoardVertical = []
   for (const number of numbers) {
     boards = boards.map((b: Board) =>
       b.map((n: Square) => (n === number ? "x" : n))
     )
-    const winningBoardHorizontal = boards
+
+    const prevH = [...winningBoardHorizontal]
+    const prevV = [...winningBoardVertical]
+    const prevR = [...results]
+    winningBoardHorizontal = boards
       .map(isHorizontalWinner)
       .map((isWinner: boolean, board: number) => (isWinner ? board : null))
       .filter(Boolean)
-    const winningBoardVertical = boards
+    winningBoardVertical = boards
       .map(isVerticalWinner)
       .map((isWinner: boolean, board: number) => (isWinner ? board : null))
       .filter(Boolean)
 
 
-    if (winningBoardVertical.length && boards[winningBoardVertical]) {
-      const board = boards[winningBoardVertical].filter(
-        (v: Square) => v !== "x"
-      )
-      results.push(calculateScore(board, number))
+    if (winningBoardVertical.length > prevV.length) {
+      const [winningBoard] = winningBoardVertical.filter((x: number) => !prevV.includes(x))
+      results.push(calculateScore(boards[winningBoard].filter((n: Square) => n !== "x"), number))
     }
-    if (winningBoardHorizontal.length && boards[winningBoardHorizontal]) {
-      const board = boards[winningBoardHorizontal].filter(
-        (v: Square) => v !== "x"
-      )
-      results.push(calculateScore(board, number))
+    if (winningBoardHorizontal.length > prevH.length) {
+      const [winningBoard] = winningBoardHorizontal.filter((x: number) => !prevH.includes(x))
+      results.push(calculateScore(boards[winningBoard].filter((n: Square) => n !== "x"), number))
     }
+
   }
+  console.log(results)
 }
 
 main(input)
