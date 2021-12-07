@@ -22,19 +22,12 @@ async function createDir(location) {
 
 async function createStart(location) {
   const template = `
-    const { readFileSync } = require("fs")
-    // const input = readFileSync("./input", "UTF-8").split(/n/) \\
-    .map((line) => line.trim().split(''));
-    function part1(input){
+    const input = Deno.readTextFileSync("input").split(",").map((n: string) => Number(n))
+
+    function solve(input){
       console.log(input)
     }
-    // function part2(input){
-    //   console.log(input)
-    // }
-    function main(input){
-      part1(input)
-    }
-    main(input)
+    solve(input)
   `
   const file = "index.ts"
   try {
