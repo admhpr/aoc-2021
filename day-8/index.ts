@@ -136,5 +136,5 @@ function part2(input: any) {
   return totalOutput
 }
 
-// console.log(part1(input))
+console.log(part1(input))
 console.log(part2(input))
