@@ -31,6 +31,7 @@ function part1(input: any) {
   return uniqueSegments
 }
 
+// don't look down 🙈
 function part2(input: any) {
   let totalOutput = 0
   for (const line of input) {
@@ -94,24 +95,21 @@ function part2(input: any) {
             sevenChars.includes(v)
           )
 
-          // console.log(digits, intersectSeven)
           if (intersectSeven.length === sevenChars.length) {
             digits[3] = seg
           }
           break
       }
-      // console.log(digits)
     }
     for (const seg of before) {
       if (seg.length === 5) {
-  
         const chars = seg.split("")
         const sixChars = digits[6].split("")
-        const intersectSix = sixChars.filter((v: any) => !chars.includes(v))
+        const differenceSix = sixChars.filter((v: any) => !chars.includes(v))
 
-        if(intersectSix.length === 1){
+        if (differenceSix.length === 1) {
           digits[5] = seg
-        }else if (seg !== digits[3] && intersectSix.length === 2){
+        } else if (seg !== digits[3] && differenceSix.length === 2) {
           digits[2] = seg
         }
       }
