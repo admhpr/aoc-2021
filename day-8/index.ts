@@ -119,9 +119,9 @@ function part2(input: any) {
       //@ts-ignore
       sortedDigits[value.split("").sort().join("")] = key
     }
-    const sortedAfter = after.map((v: any) => v.split("").sort().join(""))
+    const sortedDisplaySignals = after.map((v: any) => v.split("").sort().join(""))
     let display = ""
-    for (const seg of sortedAfter) {
+    for (const seg of sortedDisplaySignals) {
       //@ts-ignore
       if (sortedDigits[seg]) {
         //@ts-ignore
