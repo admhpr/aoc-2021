@@ -26,3 +26,51 @@ In the above example, there are _four_ low points, all highlighted: two are in t
 The _risk level_ of a low point is _1 plus its height_. In the above example, the risk levels of the low points are `2`, `1`, `6`, and `6`. The sum of the risk levels of all low points in the heightmap is therefore `15`.
 
 Find all of the low points on your heightmap. _What is the sum of the risk levels of all low points on your heightmap?_
+
+### Part Two
+
+Next, you need to find the largest basins so you know what areas are most important to avoid.
+
+A _basin_ is all locations that eventually flow downward to a single low point. Therefore, every low point has a basin, although some basins are very small. Locations of height `9` do not count as being in any basin, and all other locations will always be part of exactly one basin.
+
+The _size_ of a basin is the number of locations within the basin, including the low point. The example above has four basins.
+
+The top-left basin, size `3`:
+
+    2199943210
+    3987894921
+    9856789892
+    8767896789
+    9899965678
+    
+
+The top-right basin, size `9`:
+
+    2199943210
+    3987894921
+    9856789892
+    8767896789
+    9899965678
+    
+
+The middle basin, size `14`:
+
+    2199943210
+    3987894921
+    9856789892
+    8767896789
+    9899965678
+    
+
+The bottom-right basin, size `9`:
+
+    2199943210
+    3987894921
+    9856789892
+    8767896789
+    9899965678
+    
+
+Find the three largest basins and multiply their sizes together. In the above example, this is `1134`.
+
+_What do you get if you multiply together the sizes of the three largest basins?_
