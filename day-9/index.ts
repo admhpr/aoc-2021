@@ -27,7 +27,7 @@ function solve(input: any) {
       if (c + 1 < cols && current >= input[r][c + 1]) {
         continue
       }
-      points.push(createPoint(r, c, current))
+      points.push(createPoint(r, c))
       sum += current + 1
     }
   }
@@ -49,25 +49,25 @@ function solve(input: any) {
       visited.push(next)
       const { row, col } = next
       if (row - 1 >= 0 && input[row - 1][col] !== 9) {
-        const down = createPoint(row - 1, col, input[row - 1][col])
+        const down = createPoint(row - 1, col)
         if (!hasVisited(visited, down)) {
           toVisit.push(down)
         }
       }
       if (row + 1 < rows && input[row + 1][col] !== 9) {
-        const up = createPoint(row + 1, col, input[row + 1][col])
+        const up = createPoint(row + 1, col)
         if (!hasVisited(visited, up)) {
           toVisit.push(up)
         }
       }
       if (col - 1 >= 0 && input[row][col - 1] !== 9) {
-        const left = createPoint(row, col - 1, input[row][col - 1])
+        const left = createPoint(row, col - 1)
         if (!hasVisited(visited, left)) {
           toVisit.push(left)
         }
       }
       if (col + 1 < cols && input[row][col + 1] !== 9) {
-        const right = createPoint(row, col + 1, input[row][col + 1])
+        const right = createPoint(row, col + 1)
         if (!hasVisited(visited, right)) {
           toVisit.push(right)
         }
@@ -94,12 +94,11 @@ type Point = {
   row: number
   col: number
 }
-function createPoint(row: number, col: number, value: number) {
+function createPoint(row: number, col: number) {
   return {
     id: JSON.stringify({ row: row, col: col }),
     row,
-    col,
-    value,
+    col
   }
 }
 solve(grid)
