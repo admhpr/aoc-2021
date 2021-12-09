@@ -83,8 +83,8 @@ function solve(input: any) {
       }
     }
     largestBasins = largestBasins.sort((a, b) => a - b)
-    console.log(largestBasins.reduce((a, c) => a * c))
   }
+  console.log(largestBasins.reduce((a, c) => a * c))
 }
 function hasVisited(visited: Array<Point>, point: Point) {
   return visited.filter((p: Point) => p.id === point.id).length > 0
