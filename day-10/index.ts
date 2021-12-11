@@ -5,7 +5,7 @@
       const openers = [`(`,`[`,`{`,`<`]
       let score = 0;
       const stack = [];
-      for(const line of input.reverse()){
+      for(const line of input){
         const tokens = line.split("")
         for(const token of tokens){
           if(openers.includes(token)){
