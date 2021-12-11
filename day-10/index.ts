@@ -1,8 +1,11 @@
 
-    const input = Deno.readTextFileSync("input").split(",").map((n: string) => Number(n))
+    const input = Deno.readTextFileSync("input").split("\n")
 
-    function solve(input){
+    function solve(input: any){
       console.log(input)
+      const openers = [`(`,`[`,`{`,`<`]
+      const closers = [`)`,`]`,`}`,`>`]
+
     }
     solve(input)
   
