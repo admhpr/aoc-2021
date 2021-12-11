@@ -22,9 +22,8 @@ async function createDir(location) {
 
 async function createStart(location) {
   const template = `
-    const input = Deno.readTextFileSync("input").split(",").map((n: string) => Number(n))
-
-    function solve(input){
+    const input = Deno.readTextFileSync("input").split("\n")
+    function solve(input: string[]){
       console.log(input)
     }
     solve(input)
