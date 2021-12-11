@@ -25,7 +25,22 @@ function solve(input: any) {
     const toVisit: Array<Octopus> = []
     const { row, col } = octopus
     if (row - 1 >= 0) {
+      // up
+    }
+    if (row - 1 >= 0 && col + 1 < octopi[octopi.length - 1].col) {
+      // up right
+    }
+    if (row - 1 >= 0 && col - 1 >= 0) {
+      // up left
+    }
+    if (row + 1 < octopi.length) {
       // down
+    }
+    if (row + 1 < octopi.length && col + 1 < octopi[octopi.length - 1].col) {
+      // down right
+    }
+    if (row + 1 < && col - 1 >= 0) {
+      // down left
     }
     if (row + 1 < octopi.length) {
       // up
