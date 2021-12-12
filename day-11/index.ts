@@ -17,6 +17,11 @@ function createOctopusMap(grid: number[][]) {
   return octopi
 }
 
+function findOctopusById(id: string, octopi: Octopus[]){
+  const found = octopi.find(o => o.id === id)
+  return found 
+}
+
 function addAllAdjacent(octopus: Octopus, octopi: Octopus[]){
   const { row, col } = octopus
   const up = row - 1 >= 0
@@ -24,11 +29,24 @@ function addAllAdjacent(octopus: Octopus, octopi: Octopus[]){
   const right = col + 1 < octopi[octopi.length - 1].col
   const left = col - 1 >= 0
 
+  const toVisit: Array<Octopus> = []
+
   if (up) {
     // up
+    const o = findOctopusById(
+      JSON.stringify({ row: row - 1, col}),
+      octopi
+    )
+    if(o){
+      toVisit.push(o)
+    }
   }
   if (up && right) {
     // up right
+    const o = findOctopusById(JSON.stringify({ row: row - 1, col: col + 1 }), octopi)
+    if (o) {
+      toVisit.push(o)
+    }
   }
   if (up && left) {
     // up left
@@ -54,7 +72,7 @@ function addAllAdjacent(octopus: Octopus, octopi: Octopus[]){
 function solve(grid: number[][]) {
   const octopi = createOctopusMap(grid)
   for (const step of [...new Array(100).fill(0)]) {
-    const toVisit: Array<Octopus> = []
+
     console.log(step)
   }
 }
