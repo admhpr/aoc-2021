@@ -50,9 +50,23 @@ function addAllAdjacent(octopus: Octopus, octopi: Octopus[]){
   }
   if (up && left) {
     // up left
+      const o = findOctopusById(
+        JSON.stringify({ row: row - 1, col: col - 1 }),
+        octopi
+      )
+      if (o) {
+        toVisit.push(o)
+      }
   }
   if (down) {
     // down
+      const o = findOctopusById(
+        JSON.stringify({ row: row + 1, col }),
+        octopi
+      )
+      if (o) {
+        toVisit.push(o)
+      }
   }
   if (down && right) {
     // down right
