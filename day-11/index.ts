@@ -20,35 +20,35 @@ function createOctopusMap(grid: any) {
 function solve(input: any) {
   const octopi = createOctopusMap(input)
   for (const octopus of octopi) {
-    console.log(octopus)
-    const visited: Array<Octopus> = []
     const toVisit: Array<Octopus> = []
     const { row, col } = octopus
-    if (row - 1 >= 0) {
+    const up = row - 1 >= 0;
+    const down = row + 1 < octopi.length
+    const right = col + 1 < octopi[octopi.length - 1].col;
+    const left = col - 1 >= 0
+
+    if (up) {
       // up
     }
-    if (row - 1 >= 0 && col + 1 < octopi[octopi.length - 1].col) {
+    if (up && right) {
       // up right
     }
-    if (row - 1 >= 0 && col - 1 >= 0) {
+    if (up && left) {
       // up left
     }
-    if (row + 1 < octopi.length) {
+    if (down) {
       // down
     }
-    if (row + 1 < octopi.length && col + 1 < octopi[octopi.length - 1].col) {
+    if (down && right) {
       // down right
     }
-    if (row + 1 < && col - 1 >= 0) {
+    if (down && left) {
       // down left
     }
-    if (row + 1 < octopi.length) {
-      // up
-    }
-    if (col - 1 >= 0) {
+    if (left) {
       // left
     }
-    if (col + 1 < octopi[octopi.length - 1].col) {
+    if (right) {
       // right
     }
   }
