@@ -5,12 +5,13 @@
             "name": "Deno",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/day-12",
             "runtimeExecutable": "/home/adam/.deno/bin/deno",
             "runtimeArgs": [
                 "run",
-                "--inspect",
-                "--allow-read",
+                "--unstable",
+                "--inspect-brk",
+                "--allow-all",
                 "index.ts"
             ],
             "port": 9229

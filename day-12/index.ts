@@ -12,38 +12,61 @@ for (const [a, b] of input) {
     caves.set(a, (caves.get(a) || []).concat(b));
   }
 }
-// part one
-function partOne(): number {
-  let count = 0;
-  const paths: [string[], boolean][] = [[["start"], true]];
-  const smallCaves: {
-    [node: string]: number;
-  } = {};
-  while (paths.length) {
-    // @ts-expect-error
-    const [prev, visited] = paths.pop();
 
-    const current = prev.at(-1);
-    const nodes = caves.get(current)!;
-    if (!prev || !current || !nodes) {
+function partOne(): number {
+  let pathCount = 0;
+  const paths: string[][] = [["start"]];
+  while (paths.length) {
+    const previous = paths.pop();
+    const currentIndex = previous?.at(-1);
+    const currentNodes = caves?.get(currentIndex!);
+    if (!previous || !currentIndex || !currentNodes) {
       continue;
     }
-    for (const node of nodes) {
+
+    for (const node of currentNodes) {
       if (node === "end") {
-        count += 1;
-      } else if (node.toUpperCase() === node || prev.includes(node)) {
-        paths.push([prev.concat(node), visited]);
-      } else if (visited) {
-        smallCaves[node] = 1;
-        smallCaves[node] += 1;
-        paths.push([prev.concat(node), false]);
+        pathCount += 1;
+      } else if (node.toUpperCase() === node || !previous?.includes(node)) {
+        paths.push(previous.concat(node));
       }
     }
   }
-  return count;
+
+  return pathCount;
+}
+
+function partTwo(): number {
+  let pathCount = 0;
+  const paths: [string[], boolean][] = [[["start"], true]];
+
+  const smallCaves: {
+    [node: string]: number;
+  } = {};
+
+  while (paths.length) {
+    const [previous, visitedSmall] = paths.pop()!;
+
+    const currentIndex = previous.at(-1)!;
+    const currentNodes = caves.get(currentIndex!)!;
+
+    for (const node of currentNodes) {
+      if (node === "end") {
+        pathCount += 1;
+      } else if (node.toUpperCase() === node || !previous?.includes(node)) {
+        paths.push([previous.concat(node), visitedSmall]);
+      } else if (visitedSmall) {
+        smallCaves[node] += 1;
+        paths.push([previous.concat(node), false]);
+      }
+    }
+  }
+
+  return pathCount;
 }
 
 function solve() {
-  partOne();
+  console.log(partOne());
+  console.log(partTwo());
 }
 solve();
