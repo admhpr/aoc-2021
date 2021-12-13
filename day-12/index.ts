@@ -40,10 +40,6 @@ function partTwo(): number {
   let pathCount = 0;
   const paths: [string[], boolean][] = [[["start"], true]];
 
-  const smallCaves: {
-    [node: string]: number;
-  } = {};
-
   while (paths.length) {
     const [previous, visitedSmall] = paths.pop()!;
 
@@ -56,7 +52,6 @@ function partTwo(): number {
       } else if (node.toUpperCase() === node || !previous?.includes(node)) {
         paths.push([previous.concat(node), visitedSmall]);
       } else if (visitedSmall) {
-        smallCaves[node] += 1;
         paths.push([previous.concat(node), false]);
       }
     }
