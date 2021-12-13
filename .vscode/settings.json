@@ -2,5 +2,9 @@
     "deno.enable": true,
     "deno.lint": true,
     "deno.path": "/home/adam/.deno/bin/deno",
-    "deno.unstable": false
+    "deno.unstable": false,
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
 }
