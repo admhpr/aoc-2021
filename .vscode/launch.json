@@ -6,14 +6,13 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "deno",
+            "runtimeExecutable": "/home/adam/.deno/bin/deno",
             "runtimeArgs": [
                 "run",
-                "--inspect-brk",
-                "-A",
+                "--inspect",
+                "--allow-read",
                 "index.ts"
             ],
-            "outputCapture": "std",
             "port": 9229
         }
     ]
