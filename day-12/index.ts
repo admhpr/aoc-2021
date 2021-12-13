@@ -1,5 +1,6 @@
-const input = Deno.readTextFileSync("input").split("\n")
-// parse input
+const input = Deno.readTextFileSync("input")
+  .split("\n")
+  .map((x: string) => x.split("-"))
 // create map
 // populate map
 // part one
