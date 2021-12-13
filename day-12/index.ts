@@ -1,5 +1,5 @@
 const input = Deno.readTextFileSync("input").split("\n")
-
+// parse input
 // create map
 // populate map
 // part one
