@@ -34,6 +34,7 @@ function solve(input: string[]) {
       if (foldOn === "x") {
         if (dot.col > foldAlong) {
           const newX = foldAlong - (dot.col - foldAlong);
+          console.log(dot.col, newX, foldAlong);
           if (
             foldedGrid.find(({ id }) =>
               id === JSON.stringify({ row: dot.row, col: newX })
@@ -47,7 +48,7 @@ function solve(input: string[]) {
             dot.id = JSON.stringify({ row: dot.row, col: newX });
           }
         }
-      } else {
+      } else if (foldOn === "y") {
         if (dot.row > foldAlong) {
           const newY = foldAlong - (dot.row - foldAlong);
           if (
@@ -72,6 +73,7 @@ function solve(input: string[]) {
   }
   let maxRow = -1;
   let maxCol = -1;
+  console.log(foldedGrid);
   for (const { row, col } of foldedGrid) {
     if (row > maxRow) {
       maxRow = row;
