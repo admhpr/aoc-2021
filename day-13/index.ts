@@ -57,17 +57,3 @@ function solve(input: string[]) {
 }
 
 solve(input);
-
-type Dot = {
-  id: string;
-  row: number;
-  col: number;
-};
-function createDot(row: number, col: number) {
-  const id = JSON.stringify({ row: row, col: col });
-  return {
-    id,
-    row,
-    col,
-  };
-}
