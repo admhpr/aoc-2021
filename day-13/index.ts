@@ -44,7 +44,7 @@ function removeRow(from: number, to: number, grid: string[][]) {
   folded.splice(from, to + 1);
   return folded;
 }
-function removeCol(from: number, to: number, grid: string[][]) {
+function removeCols(from: number, to: number, grid: string[][]) {
   const folded = [...grid];
   folded.forEach((row) => row.splice(from, to + 1));
   return folded;
@@ -52,17 +52,28 @@ function removeCol(from: number, to: number, grid: string[][]) {
 
 function solve(input: string[]) {
   const { grid, instructions } = parseInput(input);
-  const foldingGrid = [...grid];
+  let foldingGrid = [...grid];
+  let isFirstFold = true;
+  const colAmount = foldingGrid[0].length;
   for (const [foldOn, foldAlong] of instructions) {
     if (foldOn === "x") {
       for (const [r, rv] of foldingGrid.entries()) {
-        for (const [c, cv] of foldingGrid[0].entries()) {
+        for (let c = foldAlong + 1; c < colAmount; c++) {
           let current = foldingGrid[r][c];
           if (current === "#") {
-            console.log(foldingGrid[r][c]);
+            const newFold = foldAlong - (c - foldAlong);
+            foldingGrid[r][c] = ".";
+            foldingGrid[r][newFold] = "#";
           }
         }
       }
+      foldingGrid = removeCols(foldAlong, colAmount + 1, foldingGrid);
+    } else {
+      // handle rows
+    }
+    if (isFirstFold) {
+      console.log(foldingGrid.flat().filter((s) => s === "#").length);
+      isFirstFold = false;
     }
   }
 }
