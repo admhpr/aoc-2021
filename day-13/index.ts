@@ -59,7 +59,7 @@ function solve(input: string[]) {
     if (foldOn === "x") {
       for (const [r, rv] of foldingGrid.entries()) {
         for (let c = foldAlong + 1; c < colAmount; c++) {
-          let current = foldingGrid[r][c];
+          const current = foldingGrid[r][c];
           if (current === "#") {
             const newFold = foldAlong - (c - foldAlong);
             foldingGrid[r][c] = ".";
@@ -67,15 +67,31 @@ function solve(input: string[]) {
           }
         }
       }
-      foldingGrid = removeCols(foldAlong, colAmount + 1, foldingGrid);
+      foldingGrid = removeCols(foldAlong, colAmount, foldingGrid);
     } else {
       // handle rows
+      for (const [r, rv] of foldingGrid.entries()) {
+        for (let c = 0; c < colAmount; c++) {
+          const current = foldingGrid[r][c];
+          if (current === "#") {
+            const newFold = foldAlong - (r - foldAlong);
+            foldingGrid[r][c] = ".";
+            foldingGrid[newFold][c] = "#";
+          }
+        }
+      }
+      foldingGrid = removeRow(foldAlong, colAmount, foldingGrid);
     }
     if (isFirstFold) {
       console.log(foldingGrid.flat().filter((s) => s === "#").length);
       isFirstFold = false;
     }
   }
+  console.log(
+    foldingGrid.map((row: number[]) => row.join("").replaceAll(".", " ")).join(
+      "\r\n",
+    ),
+  );
 }
 
 solve(input);
