@@ -52,8 +52,19 @@ function removeCol(from: number, to: number, grid: string[][]) {
 
 function solve(input: string[]) {
   const { grid, instructions } = parseInput(input);
-  console.log(grid);
-  const foldedGrid = [...grid];
+  const foldingGrid = [...grid];
+  for (const [foldOn, foldAlong] of instructions) {
+    if (foldOn === "x") {
+      for (const [r, rv] of foldingGrid.entries()) {
+        for (const [c, cv] of foldingGrid[0].entries()) {
+          let current = foldingGrid[r][c];
+          if (current === "#") {
+            console.log(foldingGrid[r][c]);
+          }
+        }
+      }
+    }
+  }
 }
 
 solve(input);
